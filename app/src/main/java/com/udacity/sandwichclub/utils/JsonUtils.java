@@ -37,10 +37,7 @@ public class JsonUtils {
 
         // Retrieve alsoKnownAs JSON Array and convert into ArrayList
         JSONArray alsoKnownAsJson = jsonObject.getJSONObject(NAME).getJSONArray(ALSO_KNOWN_AS);
-        List<String> alsoKnownAsList = new ArrayList<>();
-        for (int i = 0; i < alsoKnownAsJson.length(); i++) {
-            alsoKnownAsList.add(alsoKnownAsJson.optString(i, JSON_FAIL));
-        }
+        List<String> alsoKnownAsList = createList(alsoKnownAsJson);
 
         // Retrieve origin
         String placeOfOrigin = jsonObject.optString(PLACE_OF_ORIGIN, JSON_FAIL);
@@ -53,10 +50,7 @@ public class JsonUtils {
 
         // Retrieve ingredients JSON Array and convert into ArrayList
         JSONArray ingredientsJson = jsonObject.getJSONArray(INGREDIENTS);
-        List<String> ingredientsList = new ArrayList<>();
-        for (int i = 0; i < ingredientsJson.length(); i++) {
-            ingredientsList.add(ingredientsJson.optString(i, JSON_FAIL));
-        }
+        List<String> ingredientsList = createList(ingredientsJson);
 
         return new Sandwich(
                 mainName,
@@ -65,5 +59,13 @@ public class JsonUtils {
                 description,
                 image,
                 ingredientsList);
+    }
+
+    private static List<String> createList(JSONArray jsonArray) {
+        List<String> stringList = new ArrayList<>();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            stringList.add(jsonArray.optString(i, JSON_FAIL));
+        }
+        return stringList;
     }
 }
