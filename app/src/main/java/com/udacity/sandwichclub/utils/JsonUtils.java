@@ -19,6 +19,7 @@ public class JsonUtils {
     private static String DESCRIPTION = "description";
     private static String IMAGE = "image";
     private static String INGREDIENTS = "ingredients";
+    private static String JSON_FAIL = "N/A";
 
 
     public static Sandwich parseSandwichJson(String json) throws JSONException {
@@ -30,32 +31,31 @@ public class JsonUtils {
 
         // Retrieve the initial JSON Object
         JSONObject jsonObject = new JSONObject(json);
-        JSONObject jsonName = jsonObject.getJSONObject(NAME);
 
         // Retrieve main name
-        String mainName = jsonName.getString(MAIN_NAME);
+        String mainName = jsonObject.getJSONObject(NAME).optString(MAIN_NAME, JSON_FAIL);
 
         // Retrieve alsoKnownAs JSON Array and convert into ArrayList
-        JSONArray alsoKnownAsJson = jsonName.getJSONArray(ALSO_KNOWN_AS);
+        JSONArray alsoKnownAsJson = jsonObject.getJSONObject(NAME).getJSONArray(ALSO_KNOWN_AS);
         List<String> alsoKnownAsList = new ArrayList<>();
         for (int i = 0; i < alsoKnownAsJson.length(); i++) {
-            alsoKnownAsList.add(alsoKnownAsJson.getString(i));
+            alsoKnownAsList.add(alsoKnownAsJson.optString(i, JSON_FAIL));
         }
 
         // Retrieve origin
-        String placeOfOrigin = jsonObject.getString(PLACE_OF_ORIGIN);
+        String placeOfOrigin = jsonObject.optString(PLACE_OF_ORIGIN, JSON_FAIL);
 
         // Retrieve description
-        String description = jsonObject.getString(DESCRIPTION);
+        String description = jsonObject.optString(DESCRIPTION, JSON_FAIL);
 
         // Retrieve image URL String
-        String image = jsonObject.getString(IMAGE);
+        String image = jsonObject.optString(IMAGE, JSON_FAIL);
 
         // Retrieve ingredients JSON Array and convert into ArrayList
         JSONArray ingredientsJson = jsonObject.getJSONArray(INGREDIENTS);
         List<String> ingredientsList = new ArrayList<>();
         for (int i = 0; i < ingredientsJson.length(); i++) {
-            ingredientsList.add(ingredientsJson.getString(i));
+            ingredientsList.add(ingredientsJson.optString(i, JSON_FAIL));
         }
 
         return new Sandwich(
