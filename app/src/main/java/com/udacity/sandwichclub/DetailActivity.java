@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
 import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.model.Sandwich;
@@ -57,8 +58,6 @@ public class DetailActivity extends AppCompatActivity {
         Picasso.with(this)
                 .load(sandwich.getImage())
                 .into(ingredientsIv);
-
-        setTitle(sandwich.getMainName());
     }
 
     private void closeOnError() {
@@ -88,5 +87,9 @@ public class DetailActivity extends AppCompatActivity {
         // Set description to UI
         TextView descriptionTv = findViewById(R.id.description_tv);
         descriptionTv.setText(sandwich.getDescription());
+
+        // Set toolbar Title
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(sandwich.getMainName());
     }
 }
