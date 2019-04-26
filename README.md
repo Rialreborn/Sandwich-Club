@@ -15,7 +15,6 @@ help you to better understand how it is processed.
 
 ## What Will I Learn?
 Through this project, you will:
-- Learn how to submit projects for review
 - Practice JSON parsing to a model object
 - Design an activity layout
 - Populate all fields in the layout accordingly
