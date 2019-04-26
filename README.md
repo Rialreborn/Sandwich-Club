@@ -1,7 +1,7 @@
 # Sandwich Club Project Starter Code
 
 ## Project Overview
-Android Project for Udacity Android Developer Nanodegree.
+Android Project for [Udacity Android Developer Nanodegree.](https://eu.udacity.com/course/android-developer-nanodegree-by-google--nd801) 
 
 In this project, you will complete the **Sandwich Club** app to
 show the details of each sandwich once it is selected.
